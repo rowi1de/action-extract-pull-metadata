@@ -20,7 +20,7 @@ export async function run() {
   try {
     const
       repoToken = core.getInput('repo-token', { required: true }),
-      endpoint = core.getInput('receiver-endpoint', { required: true }),
+      endpoint : string = core.getInput('receiver-endpoint', { required: true }),
       issue: { owner: string; repo: string; number: number } = github.context.issue
       core.setSecret(repoToken);
       core.setSecret(endpoint);
@@ -56,7 +56,7 @@ export async function run() {
         console.info(element.filename + " : " + response);
       })
       .catch(function (error) {
-        console.info(element.filename + " : " + error);
+        console.error(element.filename + " : " + error);
       })
       .finally(function () {
         // always executed
