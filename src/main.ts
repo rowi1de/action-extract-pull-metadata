@@ -31,17 +31,15 @@ export async function run() {
       pull_number: issue.number
     })
 
-
      //needs to go to lambda
-     console.info("Pull Request Metadata:" + JSON.stringify(pull));
+    console.info("Pull Request Metadata:" + JSON.stringify(pull));
 
     //needs to go to lambda
     files.data.forEach(element => {
       console.info(element.filename + "content:"  + element.patch);
     });
   
-   
-    
+       
   } catch (error) {
     core.setFailed(error.message)
     throw error
