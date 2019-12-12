@@ -49,6 +49,8 @@ export async function run() {
         data: {
           // json schema version
           version: 1,
+          event: github.context.eventName,
+          action: github.context.action,
           //metadata
           metadata: {
             repo: issue.repo,
