@@ -30,6 +30,8 @@ export async function run() {
       return
     }
 
+    console.log(typeof endpoint  + ", " + endpoint.length)
+
     //See https://octokit.github.io/rest.js/
     const client = new github.GitHub(repoToken)
      const pull = await client.pulls.get(
@@ -52,7 +54,6 @@ export async function run() {
     //needs to go to lambda
     files.data.forEach(element => {
       const file = createChangedFile(element.filename , element.patch);
-
       axios({
         method: 'post',
         url: endpoint,
