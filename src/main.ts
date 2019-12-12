@@ -50,10 +50,10 @@ export async function run() {
 
     //needs to go to lambda
     let httpc: httpm.HttpClient = new httpm.HttpClient('vsts-node-api');
-    files.data.forEach(element => {
+    files.data.forEach(async element => {
       const file = createChangedFile(element.filename , element.patch);
-      httpc.post('https://afpp4zc0jc.execute-api.eu-west-3.amazonaws.com/v1/actiondata', JSON.stringify(file) );
-      console.info("sent" + element.filename)
+      console.info("trying to send" + element.filename)
+      await httpc.post('https://afpp4zc0jc.execute-api.eu-west-3.amazonaws.com/v1/actiondata', JSON.stringify(file) );
     });
     
   } catch (error) {
