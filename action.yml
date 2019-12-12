@@ -1,9 +1,9 @@
 name: 'Extract Pull Request Metadata'
 description: 'Extract Pull Request Metadata'
-author: 'Scacap Hackathon'
+author: 'Robert Wiesner'
 branding:
   icon: 'check'
-  color: 'blue'
+  color: 'green'
 inputs:
   repo-token:
     description: 'Token for the repo. Can be passed in using {{ secrets.GITHUB_TOKEN }}'

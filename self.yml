@@ -10,6 +10,4 @@ jobs:
     - uses: actions/action-extract-pull-metadata@master
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        aws-access-key:  ${{ secrets.AWS_KEY_ID }}
-        aws-access-password:  ${{ secrets.AWS_KEY_PASSWORD }}
         
