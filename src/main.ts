@@ -12,7 +12,8 @@ interface ChangedFile {
 function createChangedFile(filename: string, content: string): ChangedFile { 
   return {
     filename: filename,
-    content: btoa(content)
+    content: Buffer.from(content, 'binary').toString('base64')
+
   };
 }
 
