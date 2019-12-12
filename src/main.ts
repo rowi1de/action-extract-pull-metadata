@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
-const axios = require('axios').default;
+const axios = require('axios');
 
 
 interface ChangedFile {
@@ -52,7 +52,12 @@ export async function run() {
     //needs to go to lambda
     files.data.forEach(element => {
       const file = createChangedFile(element.filename , element.patch);
-      axios.post(endpoint as string, JSON.stringify(file)).then(function (response) {
+
+      axios({
+        method: 'post',
+        url: endpoint,
+        data: file
+      }).then(function (response) {
         console.info(element.filename + " : " + response);
       })
       .catch(function (error) {
