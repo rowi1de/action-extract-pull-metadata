@@ -58,7 +58,7 @@ export async function run() {
         url: endpoint,
         data: file
       }).then(function (response) {
-        console.info(element.filename + " : " + response);
+        console.info(element.filename + " : " + response.status);
       })
       .catch(function (error) {
         core.setFailed(element.filename + " : " + error.message);
