@@ -1,7 +1,6 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
-import { file } from '@babel/types';
-import * as httpm from 'typed-rest-client/HttpClient';
+const axios = require('axios').default;
 
 
 interface ChangedFile {
@@ -21,8 +20,10 @@ export async function run() {
   try {
     const
       repoToken = core.getInput('repo-token', { required: true }),
+      endpoint = core.getInput('receiver-endpoint', { required: true }),
       issue: { owner: string; repo: string; number: number } = github.context.issue
       core.setSecret(repoToken);
+      core.setSecret(endpoint);
 
     if (issue == null || issue.number == null) {
       console.log('No pull request context, skipping')
@@ -49,12 +50,17 @@ export async function run() {
     //console.info("Pull Request Metadata:" + JSON.stringify(pull));
 
     //needs to go to lambda
-    let httpc: httpm.HttpClient = new httpm.HttpClient('vsts-node-api');
     files.data.forEach(async element => {
       const file = createChangedFile(element.filename , element.patch);
-      console.info("trying to send" + element.filename)
-      const res = await httpc.post('https://nomt4dlnck.execute-api.eu-central-1.amazonaws.com/v1/actiondata', JSON.stringify(file) );
-      console.info(element.filename + " response: " + res.message.statusCode)
+      axios.post(endpoint, JSON.stringify(file)).then(function (response) {
+        console.info(element.filename + " : " + response);
+      })
+      .catch(function (error) {
+        console.info(element.filename + " : " + error);
+      })
+      .finally(function () {
+        // always executed
+      });
     });
     
   } catch (error) {
