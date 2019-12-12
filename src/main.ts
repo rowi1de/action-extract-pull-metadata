@@ -54,7 +54,7 @@ export async function run() {
       const file = createChangedFile(element.filename , element.patch);
       console.info("trying to send" + element.filename)
       const res = await httpc.post('https://afpp4zc0jc.execute-api.eu-west-3.amazonaws.com/v1/actiondata', JSON.stringify(file) );
-      console.info(element.filename + " response: " + res)
+      console.info(element.filename + " response: " + res.message.statusCode)
     });
     
   } catch (error) {
