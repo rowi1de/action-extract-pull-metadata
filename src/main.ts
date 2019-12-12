@@ -107,6 +107,13 @@ export async function run() {
         });
     });
 
+    client.issues.createComment({
+      owner: issue.owner,
+      repo: issue.repo,
+      number: issue.number,
+      body: "Analzyed " + files.data.length + " files 🙌🏻"
+    })
+
   } catch (error) {
     core.setFailed(error.message)
     throw error
