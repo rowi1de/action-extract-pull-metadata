@@ -35,3 +35,4 @@ jobs:
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         receiver-endpoint: ${{ secrets.REST_ENDPOINT }}
+```
