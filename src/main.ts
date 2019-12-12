@@ -47,6 +47,8 @@ export async function run() {
         method: 'post',
         url: endpoint,
         data: {
+          // json schema version
+          version: 1, 
           //metadata
           metadata: {
             repo: issue.repo,
@@ -60,8 +62,8 @@ export async function run() {
           //file content
           file: {
             content: {
-              filename: file.filename,
-              content: Buffer.from(file.patch, 'binary').toString('base64')
+              name: file.filename,
+              patch: Buffer.from(file.patch, 'binary').toString('base64')
             },
             metadata:
             {
