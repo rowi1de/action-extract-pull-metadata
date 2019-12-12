@@ -8,14 +8,6 @@ interface ChangedFile {
   content: string;
 }
 
-function createChangedFile(filename: string, content: string): ChangedFile { 
-  return {
-    filename: filename,
-    content: Buffer.from(content, 'binary').toString('base64')
-
-  };
-}
-
 export async function run() {
   try {
     const
@@ -48,19 +40,33 @@ export async function run() {
       pull_number: issue.number
     })
 
+     //needs to go to lambda
+    //console.info("Pull Request Metadata:" + JSON.stringify(pull));
 
-    //send files to lambda
-    files.data.forEach(element => {
-      const file = createChangedFile(element.filename , element.patch);
+    //needs to go to lambda
+    files.data.forEach(file => {
       axios({
         method: 'post',
         url: endpoint,
-        data: file
+        data: {
+          repo: issue.repo,
+          pull_number: issue.number,
+          author: issue.owner,
+          reviewers: pull.data.requested_reviewers,
+          filename: file.filename,
+          content: Buffer.from(file.patch, 'binary').toString('base64'),
+          blob_url: file.blob_url,
+          raw_url: file.raw_url,
+          additions: file.additions,
+          deletions: file.deletions,
+          changes: file.changes,
+          file_status: file.status
+        }
       }).then(function (response) {
-        console.info(element.filename + " : " + response.status);
+        console.info(file.filename + " : " + response.status);
       })
       .catch(function (error) {
-        core.setFailed(element.filename + " : " + error.message);
+        core.setFailed(file.filename + " : " + error.message);
         throw error;
       })
       .finally(function () {
