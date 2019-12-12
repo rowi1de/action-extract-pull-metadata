@@ -1,5 +1,5 @@
 # GitHub Action: action-extract-pull-metadata
-Winter Hackathon Project 2019 for [Scalable Capital](http://scalable.capital/)
+Winter Hackathon Project 2019 for [@Scacap](https://github.com/ScaCap)
 
 - Backend:
   - @krunogrc
