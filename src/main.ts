@@ -3,6 +3,18 @@ import * as github from '@actions/github';
 import { file } from '@babel/types';
 
 
+interface ChangedFile {
+  filename: string;
+  content: string;
+}
+
+function createChangedFile(filename: string, content: string): ChangedFile { 
+  return {
+    filename: filename,
+    content: btoa(content)
+  };
+}
+
 export async function run() {
   try {
     const
@@ -32,11 +44,12 @@ export async function run() {
     })
 
      //needs to go to lambda
-    console.info("Pull Request Metadata:" + JSON.stringify(pull));
+    //console.info("Pull Request Metadata:" + JSON.stringify(pull));
 
     //needs to go to lambda
     files.data.forEach(element => {
-      console.info("\n" + element.filename + "\ncontent:\n"  + element.patch);
+      const file = createChangedFile(element.filename , element.patch);
+      console.info(JSON.stringify(file))
     });
     
   } catch (error) {
