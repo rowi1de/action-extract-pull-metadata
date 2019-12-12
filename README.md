@@ -3,7 +3,7 @@ Winter Hackathon Project 2019 for [Scalable Capital](http://scalable.capital/)
 
 - Backend:
   - https://github.com/krunogrc
-  - https://github.com/rowi1e
+  - https://github.com/rowi1de
 - Machine Learning / Feature Extraction
   -  https://github.com/huyqd
   - https://github.com/nikolasrieble
