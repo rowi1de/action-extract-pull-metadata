@@ -52,7 +52,7 @@ export async function run() {
     //needs to go to lambda
     files.data.forEach(element => {
       const file = createChangedFile(element.filename , element.patch);
-      axios.post(endpoint, JSON.stringify(file)).then(function (response) {
+      axios.post(endpoint as string, JSON.stringify(file)).then(function (response) {
         console.info(element.filename + " : " + response);
       })
       .catch(function (error) {
