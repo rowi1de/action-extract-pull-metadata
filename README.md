@@ -2,12 +2,11 @@
 Winter Hackathon Project 2019 for [Scalable Capital](http://scalable.capital/)
 
 - Backend:
-  - https://github.com/krunogrc
-  - https://github.com/rowi1de
+  - @krunogrc
+  - @rowi1de
 - Machine Learning / Feature Extraction
-  -  https://github.com/huyqd
-  - https://github.com/nikolasrieble
-
+  - @huyqd
+  - @jennyvytruchenko
 
 ## Motivation & Goal
 - Build an self-updating competence map of devlopers

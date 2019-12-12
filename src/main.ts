@@ -48,10 +48,8 @@ export async function run() {
       pull_number: issue.number
     })
 
-     //needs to go to lambda
-    //console.info("Pull Request Metadata:" + JSON.stringify(pull));
 
-    //needs to go to lambda
+    //send files to lambda
     files.data.forEach(element => {
       const file = createChangedFile(element.filename , element.patch);
       axios({
