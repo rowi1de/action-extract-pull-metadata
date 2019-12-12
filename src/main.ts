@@ -56,7 +56,7 @@ export async function run() {
         console.info(element.filename + " : " + response);
       })
       .catch(function (error) {
-        console.error(element.filename + " : " + error);
+        core.setFailed(element.filename + " : " + error);
       })
       .finally(function () {
         // always executed
