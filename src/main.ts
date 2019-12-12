@@ -36,10 +36,9 @@ export async function run() {
 
     //needs to go to lambda
     files.data.forEach(element => {
-      console.info(element.filename + "content:"  + element.patch);
+      console.info("\n" + element.filename + "\ncontent:\n"  + element.patch);
     });
-  
-       
+    
   } catch (error) {
     core.setFailed(error.message)
     throw error
