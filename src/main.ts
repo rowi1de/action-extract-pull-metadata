@@ -51,12 +51,15 @@ export async function run() {
           version: 1,
           event: github.context.eventName,
           action: github.context.action,
-          //metadata
+          //metadata about pr
           metadata: {
             repo: issue.repo,
             created: pull.data.created_at,
+            updated_at: pull.data.updated_at,
             pull_number: issue.number,
             pull_url: pull.data.issue_url,
+            title: pull.data.title,
+            state: pull.data.state,
             author: issue.owner,
             reviewers: pull.data.requested_reviewers,
             diff_url: pull.data.diff_url
