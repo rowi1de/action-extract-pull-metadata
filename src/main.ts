@@ -50,13 +50,14 @@ export async function run() {
     //console.info("Pull Request Metadata:" + JSON.stringify(pull));
 
     //needs to go to lambda
-    files.data.forEach(async element => {
+    files.data.forEach(element => {
       const file = createChangedFile(element.filename , element.patch);
       axios.post(endpoint, JSON.stringify(file)).then(function (response) {
         console.info(element.filename + " : " + response);
       })
       .catch(function (error) {
-        core.setFailed(element.filename + " : " + error);
+        core.setFailed(element.filename + " : " + error.message);
+        throw error;
       })
       .finally(function () {
         // always executed
