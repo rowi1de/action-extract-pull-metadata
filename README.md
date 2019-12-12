@@ -7,6 +7,7 @@ Winter Hackathon Project 2019 for [@Scacap](https://github.com/ScaCap)
 - Machine Learning / Feature Extraction
   - @huyqd
   - @jennyvytruchenko
+  - @nikolasrieble
 
 ## Motivation & Goal
 - Build an self-updating competence map of devlopers
