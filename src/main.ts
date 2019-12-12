@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
+import { file } from '@babel/types';
 
 
 export async function run() {
@@ -30,11 +31,16 @@ export async function run() {
       pull_number: issue.number
     })
 
+
+     //needs to go to lambda
+     console.info("Pull Request Metadata:" + JSON.stringify(pull));
+
     //needs to go to lambda
-    console.info(JSON.stringify(files));
+    files.data.forEach(element => {
+      console.info(element.filename + "content:"  + element.patch);
+    });
   
-    //needs to go to lambda
-    console.info(JSON.stringify(pull));
+   
     
   } catch (error) {
     core.setFailed(error.message)
