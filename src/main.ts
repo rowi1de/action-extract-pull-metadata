@@ -111,7 +111,7 @@ export async function run() {
       owner: issue.owner,
       repo: issue.repo,
       number: issue.number,
-      body: "Analzyed " + files.data.length + " files 🙌🏻"
+      body: "Analzyed " + files.data.length + " files 🙌🏻 on event: " + github.context.eventName
     })
 
   } catch (error) {
