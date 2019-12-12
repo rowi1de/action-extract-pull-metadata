@@ -8,6 +8,11 @@ inputs:
   repo-token:
     description: 'Token for the repo. Can be passed in using {{ secrets.GITHUB_TOKEN }}'
     required: true
+  receiver-endpoint:
+    description: 'REST Endpoint to receive the data. Can be passed in using {{ secrets.REST_ENDPOINT }}'
+    required: true
+      
+    
 runs:
   using: 'node12'
   main: 'lib/index.js'
