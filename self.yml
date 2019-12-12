@@ -1,18 +1,14 @@
 name: CI
 
-on: [push]
+on: [push, pull]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/auto-assign-review-teams@v0.0.6
+    - uses: actions/action-extract-pull-metadata@master
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        persons: "rowi1de"
-        teams: "no-team"
-        include-draft: false
-        skip-with-manual-reviewers: 1
+        receiver-endpoint: ${{ secrets.REST_ENDPOINT }}
         

@@ -1,25 +1,22 @@
+# GitHub Action: action-extract-pull-metadata
+Winter Hackathon Project 2019 for [Scalable Capital](http://scalable.capital/)
 
-# Auto Assign Review Teams
-- Assign individual persons or member of [GitHub Teams](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/organizing-members-into-teams) 
-- Team Assignment Works best, if [code review assignment](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/managing-code-review-assignment-for-your-team) for the team is enabled
+- Backend:
+  - https://github.com/krunogrc
+  - https://github.com/rowi1de
+- Machine Learning / Feature Extraction
+  -  https://github.com/huyqd
+  - https://github.com/nikolasrieble
 
-## Example Usage
-```yaml
-name: "Assign Reviewers"
-on:  
-  pull_request:
-    types: [opened, ready_for_review]
-     
-jobs:
-  assign-reviewers:
-    runs-on: ubuntu-latest
-    steps:
-    - name: "Assign Team and Persons"
-      uses: rowi1de/auto-assign-review-teams@v0.0.6
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        teams: "gitub-org-team"         # only works for GitHub Organisation/Teams
-        persons: "rowi1de"              # add individual persons here 
-        include-draft: false            # Draft PRs will be skipped (default: false)
-        skip-with-manual-reviewers: 0   # Skip this action, if the number of reviwers was already assigned (default: 0)
-```
+
+## Motivation & Goal
+- Build an self-updating competence map of devlopers
+- Analyze PR Metadata, Change files 
+- Extract Features (language, dependnecies, packages ...) 
+- Join Expert + Learners on one PR for Knowledge Sharing
+
+## Architecture
+- GitHub Action to Process PR Data
+- Send to AWS / API-G to Lambda
+- Store Data in Mongo DB Atlas
+- ... Python on that 
