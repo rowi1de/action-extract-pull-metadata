@@ -1,0 +1,23 @@
+name: 'Auto Assign Review Teams'
+description: 'Send review requests to teams (with Auto Assignment) or persons'
+author: 'Robert Wiesner'
+branding:
+  icon: 'check'
+  color: 'blue'
+inputs:
+  repo-token:
+    description: 'Token for the repo. Can be passed in using {{ secrets.GITHUB_TOKEN }}'
+    required: true
+  teams:
+    description: 'Teams (works best with Auto Assignment) - team1, team 2'
+    required: true
+  persons:
+    description: 'Individual Reviewers - person1, person2'
+    required: false
+  include-draft:
+    description: 'If set to true, DRAFT PRs will also be covered (default=false)'
+    required: false
+
+runs:
+  using: 'node12'
+  main: 'lib/index.js'
