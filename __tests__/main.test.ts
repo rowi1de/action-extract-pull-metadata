@@ -22,7 +22,6 @@ describe('Team', () => {
       .reply(200)
       
     const main = require('../src/main')
-
     await main.run()
   })
 })
