@@ -38,8 +38,19 @@ export async function run() {
       pull_number: issue.number
     })
 
-    //needs to go to lambda
-    //console.info("Pull Request Metadata:" + JSON.stringify(pull));
+    const commits = await client.pulls.listCommits({
+      owner: issue.owner,
+      repo: issue.repo,
+      pull_number: issue.number
+    })
+
+    const commit_data = commits.data.map(commit => {
+      return {
+        commit: commit.sha,
+        message: commit.commit.message,
+        committer: commit.commit.committer
+      }
+    })
 
     //needs to go to lambda
     files.data.forEach(file => {
@@ -48,7 +59,7 @@ export async function run() {
         url: endpoint,
         data: {
           // json schema version
-          version: 1,
+          version: 2,
           event: github.context.eventName,
           action: github.context.action,
           //metadata about pr
@@ -81,7 +92,8 @@ export async function run() {
               file_status: file.status,
               sha: file.sha
             }
-          }
+          },
+          commits: commit_data
         }
       }).then(function (response) {
         console.info(file.filename + " : " + response.status);
