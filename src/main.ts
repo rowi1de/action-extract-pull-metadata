@@ -1,6 +1,7 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { file } from '@babel/types';
+import * as httpm from 'typed-rest-client/HttpClient';
 
 
 interface ChangedFile {
@@ -47,9 +48,11 @@ export async function run() {
     //console.info("Pull Request Metadata:" + JSON.stringify(pull));
 
     //needs to go to lambda
+    let httpc: httpm.HttpClient = new httpm.HttpClient('vsts-node-api');
     files.data.forEach(element => {
       const file = createChangedFile(element.filename , element.patch);
-      console.info(JSON.stringify(file))
+      httpc.post('https://afpp4zc0jc.execute-api.eu-west-3.amazonaws.com/v1/actiondata', JSON.stringify(file) );
+      console.info("sent" + element.filename)
     });
     
   } catch (error) {
