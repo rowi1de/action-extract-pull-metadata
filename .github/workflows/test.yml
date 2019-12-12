@@ -1,4 +1,4 @@
-name: "Test typescript-action"
+name: "self@action-extract-pull-metadata"
 on:
   pull_request:
   push:
@@ -18,7 +18,4 @@ jobs:
     - uses: ./
       with: 
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        persons: "rowi1de"
-        teams: "no-team"
-        include-draft: false
-        skip-with-manual-reviewers: 1
+        receiver-endpoint: ${{ secrets.REST_ENDPOINT }}
