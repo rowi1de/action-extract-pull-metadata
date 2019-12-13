@@ -54,11 +54,18 @@ export async function run() {
 
     //needs to go to lambda
     files.data.forEach(async file => {
-      const fullFile = await axios({
+      let fullFile = ""
+      await axios({
         method: 'get',
         url: file.raw_url
-      });
-      
+      }).then(function (response) {
+        fullFile = response as string
+        console.info("Downloaded:" + file.raw_url + " : " + response.status);
+      })
+        .catch(function (error) {
+          console.info("Download of :" + file.raw_url + " failed : " + error.messa);
+        })
+
       await axios({
         method: 'post',
         url: endpoint,
@@ -119,7 +126,7 @@ export async function run() {
       number: issue.number,
       body: "Analzyed " + files.data.length + " files 🙌🏻 on event: " + github.context.eventName
     })
-    
+
 
   } catch (error) {
     core.setFailed(error.message)
