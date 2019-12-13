@@ -1,6 +1,6 @@
 package com.scacap.hack;
-//some java code
-//fee free to add imports etc!
+import java.util.Iterator;
+import java.util.Collection;
 public class HelloWorld {
 
     public static void main(String[] args) {
