@@ -67,7 +67,7 @@ export async function run() {
         console.error("Download for : " + file.filename + " failed : " + res.status)
       }
 
-      console.info(JSON.stringify(res))
+      console.info(res.base64)
 
       await axios({
         method: 'post',
