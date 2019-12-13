@@ -61,18 +61,20 @@ export async function run() {
       let fullFile = ""
       if (res.status == 200) {
         console.log("Download for : " + file.filename + " : " + res.status)
-        fullFile = Buffer.from(res.body, 'binary').toString('base64')
+        fullFile = Buffer.from(res.data, 'binary').toString('base64')
       }
       else {
         console.error("Download for : " + file.filename + " failed : " + res.status)
       }
+
+      console.info(JSON.stringify(res))
 
       await axios({
         method: 'post',
         url: endpoint,
         data: {
           // json schema version
-          version: 4,
+          version: 5,
           event: github.context.eventName,
           action: github.context.action,
           //metadata about pr
