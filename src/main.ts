@@ -72,7 +72,7 @@ export async function run() {
         url: endpoint,
         data: {
           // json schema version
-          version: 3,
+          version: 4,
           event: github.context.eventName,
           action: github.context.action,
           //metadata about pr
