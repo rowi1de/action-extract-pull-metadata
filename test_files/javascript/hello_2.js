@@ -1,3 +1,8 @@
+<<<<<<< Updated upstream
+=======
+import * as express from 'express';
+import react as react from 'react';
+>>>>>>> Stashed changes
 var express = require('express');
 var app = express();
 
