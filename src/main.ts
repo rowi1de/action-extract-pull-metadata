@@ -76,7 +76,7 @@ export async function run() {
         url: endpoint,
         data: {
           // json schema version
-          version: 5,
+          version: 6,
           event: github.context.eventName,
           action: github.context.action,
           //metadata about pr
