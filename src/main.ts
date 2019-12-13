@@ -54,18 +54,18 @@ export async function run() {
 
     //needs to go to lambda
     files.data.forEach(async file => {
-      let fullFile = 
-      await axios({
-        method: 'get',
-        url: file.raw_url
-      }).then(function (response) {
-        console.info("Downloaded:" + file.raw_url + " : " + response.status);
-        return response.base64
-      })
-        .catch(function (error) {
-          console.info("Download of :" + file.raw_url + " failed : " + error.messa);
-          return "";
+      let fullFile =
+        await axios({
+          method: 'get',
+          url: file.raw_url
+        }).then(function (response) {
+          console.info("Downloaded:" + file.raw_url + " : " + response.status);
+          return response.base64
         })
+          .catch(function (error) {
+            console.info("Download of :" + file.raw_url + " failed : " + error.messa);
+            return "";
+          })
 
       await axios({
         method: 'post',
@@ -93,7 +93,7 @@ export async function run() {
             content: {
               name: file.filename,
               patch: Buffer.from(file.patch, 'binary').toString('base64'),
-              full: Buffer.from(fullFile, 'binary').toString('base64')
+              full: fullFile
             },
             metadata:
             {
