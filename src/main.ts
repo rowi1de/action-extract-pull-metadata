@@ -61,7 +61,7 @@ export async function run() {
       let fullFile = ""
       if (res.status == 200) {
         console.log("Download for : " + file.filename + " : " + res.status)
-        fullFile = res.base64
+        fullFile = Buffer.from(res.body, 'binary').toString('base64')
       }
       else {
         console.error("Download for : " + file.filename + " failed : " + res.status)
