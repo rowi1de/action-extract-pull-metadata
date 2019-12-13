@@ -15,9 +15,10 @@ def lambda_handler(event, context):
     fileCollection = db.get_collection("files")
     cursor = fileCollection.find({"version":6})
 
+   pymongo.delete()
     more_magic.test()
     base64.cool()
-    pymongo.delete()
+  
 
     ##COMPUTE COMPETENCE
     resultList = []
