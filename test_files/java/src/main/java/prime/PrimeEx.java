@@ -50,7 +50,7 @@ public class PrimeEx {
 				int index = 2 * i;
 				while(index < result.length){
 					result[index] = false;
-					 index += i;
+					 index = index + i;
 				}
 			}
 		}
