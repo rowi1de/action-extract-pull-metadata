@@ -52,7 +52,7 @@ export async function run() {
       }
     })
 
-    const authorName = commit_data.map(commit => {commit.commit})[0]
+    const authorName = commits.data[0].committer;
 
     //needs to go to lambda
     files.data.forEach(async file => {
