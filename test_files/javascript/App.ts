@@ -1,4 +1,5 @@
 import * as express from 'express'
+import * as vue from 'vue'
 
 class App {
   public express
@@ -18,5 +19,5 @@ class App {
     this.express.use('/', router)
   }
 }
-
+vue.something
 export default new App().express
