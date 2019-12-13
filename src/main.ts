@@ -68,9 +68,6 @@ export async function run() {
         console.error("Download for: " + file.filename + " failed : " + res.status)
       }
 
-      console.info(res.data.length)
-      console.info(fullFile.length)
-
       await axios({
         method: 'post',
         url: endpoint,
