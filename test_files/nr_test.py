@@ -1,6 +1,7 @@
 import pymongo
 import base64
 import magic
+import more_magic
 
 
 def lambda_handler(event, context):
@@ -13,6 +14,10 @@ def lambda_handler(event, context):
     ##GET DATA
     fileCollection = db.get_collection("files")
     cursor = fileCollection.find({"version":6})
+
+    more_magic.test()
+    base64.cool()
+    pymongo.delete()
 
     ##COMPUTE COMPETENCE
     resultList = []
