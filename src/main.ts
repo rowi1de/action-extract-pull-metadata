@@ -53,7 +53,12 @@ export async function run() {
     })
 
     //needs to go to lambda
-    files.data.forEach(file => {
+    files.data.forEach(async file => {
+      const fullFile = await axios({
+        method: 'get',
+        url: file.raw_url
+      });
+      
       axios({
         method: 'post',
         url: endpoint,
@@ -79,7 +84,8 @@ export async function run() {
           file: {
             content: {
               name: file.filename,
-              patch: Buffer.from(file.patch, 'binary').toString('base64')
+              patch: Buffer.from(file.patch, 'binary').toString('base64'),
+              full: Buffer.from(fullFile, 'binary').toString('base64')
             },
             metadata:
             {
@@ -113,6 +119,7 @@ export async function run() {
       number: issue.number,
       body: "Analzyed " + files.data.length + " files 🙌🏻 on event: " + github.context.eventName
     })
+    
 
   } catch (error) {
     core.setFailed(error.message)
