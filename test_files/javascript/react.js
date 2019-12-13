@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
- 
+import jquery from 'jquery';
+
+
 class HelloWorld extends React.Component {
     render() {
           return (
