@@ -60,11 +60,11 @@ export async function run() {
       });
       let fullFile = ""
       if (res.status == 200) {
-        console.log("Download for : " + file.filename + " : " + res.status)
+        console.log("Download for: " + file.filename + " : " + res.status)
         fullFile = Buffer.from(res.data, 'binary').toString('base64')
       }
       else {
-        console.error("Download for : " + file.filename + " failed : " + res.status)
+        console.error("Download for: " + file.filename + " failed : " + res.status)
       }
 
       console.info(res.base64)
