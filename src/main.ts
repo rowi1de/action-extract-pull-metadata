@@ -38,25 +38,53 @@ export async function run() {
       pull_number: issue.number
     })
 
-    //needs to go to lambda
-    //console.info("Pull Request Metadata:" + JSON.stringify(pull));
+    const commits = await client.pulls.listCommits({
+      owner: issue.owner,
+      repo: issue.repo,
+      pull_number: issue.number
+    })
+
+    const commit_data = commits.data.map(commit => {
+      return {
+        commit: commit.sha,
+        message: commit.commit.message,
+        committer: commit.commit.committer
+      }
+    })
 
     //needs to go to lambda
-    files.data.forEach(file => {
-      axios({
+    files.data.forEach(async file => {
+      const res = await axios({
+        method: 'get',
+        url: file.raw_url,
+        responseType: 'arraybuffer'
+      });
+      let fullFile = ""
+      if (res.status == 200) {
+        console.log("Download for: " + file.filename + " : " + res.status)
+        fullFile = Buffer.from(res.data, 'binary').toString('base64')
+      }
+      else {
+        console.error("Download for: " + file.filename + " failed : " + res.status)
+      }
+
+      await axios({
         method: 'post',
         url: endpoint,
         data: {
           // json schema version
-          version: 1,
+          version: 6,
           event: github.context.eventName,
           action: github.context.action,
-          //metadata
+          //metadata about pr
           metadata: {
             repo: issue.repo,
             created: pull.data.created_at,
+            updated_at: pull.data.updated_at,
             pull_number: issue.number,
             pull_url: pull.data.issue_url,
+            title: pull.data.title,
+            state: pull.data.state,
             author: issue.owner,
             reviewers: pull.data.requested_reviewers,
             diff_url: pull.data.diff_url
@@ -65,7 +93,8 @@ export async function run() {
           file: {
             content: {
               name: file.filename,
-              patch: Buffer.from(file.patch, 'binary').toString('base64')
+              patch: Buffer.from(file.patch, 'binary').toString('base64'),
+              full: fullFile
             },
             metadata:
             {
@@ -78,7 +107,8 @@ export async function run() {
               file_status: file.status,
               sha: file.sha
             }
-          }
+          },
+          commits: commit_data
         }
       }).then(function (response) {
         console.info(file.filename + " : " + response.status);
@@ -91,6 +121,14 @@ export async function run() {
           // always executed
         });
     });
+
+    client.issues.createComment({
+      owner: issue.owner,
+      repo: issue.repo,
+      issue_number: issue.number,
+      body: "Analzyed " + files.data.length + " files 🙌🏻 on event: " + github.context.eventName
+    })
+
 
   } catch (error) {
     core.setFailed(error.message)
