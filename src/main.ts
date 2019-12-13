@@ -54,18 +54,18 @@ export async function run() {
 
     //needs to go to lambda
     files.data.forEach(async file => {
-      let fullFile =
-        await axios({
-          method: 'get',
-          url: file.raw_url
-        }).then(function (response) {
-          console.info("Downloaded:" + file.raw_url + " : " + response.status);
-          return response.base64
-        })
-          .catch(function (error) {
-            console.info("Download of :" + file.raw_url + " failed : " + error.messa);
-            return "";
-          })
+      const res = await axios({
+        method: 'get',
+        url: file.raw_url
+      });
+      let fullFile = ""
+      if (res.status == 200) {
+        console.log("Download for : " + file.filename + " : " + res.status)
+        fullFile = res.base64
+      }
+      else {
+        console.error("Download for : " + file.filename + " failed : " + res.status)
+      }
 
       await axios({
         method: 'post',
