@@ -56,7 +56,8 @@ export async function run() {
     files.data.forEach(async file => {
       const res = await axios({
         method: 'get',
-        url: file.raw_url
+        url: file.raw_url,
+        responseType: 'arraybuffer'
       });
       let fullFile = ""
       if (res.status == 200) {
@@ -67,7 +68,8 @@ export async function run() {
         console.error("Download for: " + file.filename + " failed : " + res.status)
       }
 
-      console.info(res.base64)
+      console.info(res.data.length)
+      console.info(fullFile.length)
 
       await axios({
         method: 'post',
