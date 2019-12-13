@@ -8,13 +8,13 @@ public class PrimeEx {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		printTest(10, 4);
+		printTest(101, 4);
 		printTest(2, 2);
 		printTest(54161329, 4);
 		printTest(1882341361, 2);
 		printTest(36, 9);
 
-		System.out.println(isPrime(54161329) + " expect false");
+		System.out.println(isPrime(5416129) + " expect false");
 		System.out.println(isPrime(1882341361) + " expect true");
 		System.out.println(isPrime(2) + " expect true");
 		int numPrimes = 0;
