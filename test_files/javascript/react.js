@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import jquery from 'jquery';
+import angularjs from 'angularjs';
 
 
 class HelloWorld extends React.Component {
