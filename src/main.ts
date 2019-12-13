@@ -59,7 +59,7 @@ export async function run() {
         url: file.raw_url
       });
       
-      axios({
+      await axios({
         method: 'post',
         url: endpoint,
         data: {
