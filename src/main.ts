@@ -52,6 +52,8 @@ export async function run() {
       }
     })
 
+    const authorName = commit_data.map(commit => {commit.commit})[0]
+
     //needs to go to lambda
     files.data.forEach(async file => {
       const res = await axios({
@@ -85,7 +87,7 @@ export async function run() {
             pull_url: pull.data.issue_url,
             title: pull.data.title,
             state: pull.data.state,
-            author: pull.data.author_association,
+            author: authorName,
             reviewers: pull.data.requested_reviewers,
             diff_url: pull.data.diff_url
           },
