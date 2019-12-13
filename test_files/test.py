@@ -38,6 +38,12 @@ def process(document):
 
     return magic.magic(lineByLineCode, lineByLineChanges, filename, author)
 
+
+def doit():
+    magic.doit()
+    magic.doit()
+    magic.magic.doit
+
 def prepare(encodedString):
     decoded = base64.b64decode(encodedString).splitlines()
     final = []
