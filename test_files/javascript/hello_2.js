@@ -1,5 +1,3 @@
-import * as express from 'express'
-import react as react from 'react'
 var express = require('express');
 var app = express();
 

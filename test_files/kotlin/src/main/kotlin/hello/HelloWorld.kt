@@ -1,6 +1,6 @@
 package hello
 
-// Hello World Program
+// Hello Hackers Program
 fun main(args : Array<String>) {
-    println("Hello, World!")
+    println("Hello, Hackers!!")
 }
