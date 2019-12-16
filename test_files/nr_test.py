@@ -1,6 +1,13 @@
 import pymongo
 import base64
 import magic
+import supermagic
+import ubermagic
+
+
+def doit():
+    supermagic.test()
+    ubermagic.doit()
 import more_magic
 
 
