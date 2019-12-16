@@ -8,6 +8,7 @@ import ubermagic
 def doit():
     supermagic.test()
     ubermagic.doit()
+import more_magic
 
 
 def lambda_handler(event, context):
@@ -20,6 +21,11 @@ def lambda_handler(event, context):
     ##GET DATA
     fileCollection = db.get_collection("files")
     cursor = fileCollection.find({"version":6})
+
+   pymongo.delete()
+    more_magic.test()
+    base64.cool()
+  
 
     ##COMPUTE COMPETENCE
     resultList = []
