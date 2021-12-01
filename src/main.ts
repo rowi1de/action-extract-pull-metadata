@@ -12,7 +12,7 @@ export async function run() {
   try {
     const
       repoToken = core.getInput('repo-token', { required: true }),
-      endpoint: string = core.getInput('receiver-endpoint', { required: true }),
+      endpoint: string = core.getInput('receiver-endpoint', { required: false }),
       issue: { owner: string; repo: string; number: number } = github.context.issue
     core.setSecret(repoToken);
     core.setSecret(endpoint);
@@ -68,6 +68,7 @@ export async function run() {
         console.error("Download for: " + file.filename + " failed : " + res.status)
       }
 
+      if(endpoint != null){
       await axios({
         method: 'post',
         url: endpoint,
@@ -119,15 +120,18 @@ export async function run() {
         })
         .finally(function () {
           // always executed
-        });
-    });
-
-    client.issues.createComment({
+        client.issues.createComment({
       owner: issue.owner,
       repo: issue.repo,
       issue_number: issue.number,
       body: "Analzyed " + files.data.length + " files 🙌🏻 on event: " + github.context.eventName
     })
+        });
+    });
+    } 
+    
+
+    
 
 
   } catch (error) {
