@@ -21,6 +21,11 @@ export async function run() {
       console.log('No pull request context, skipping')
       return
     }
+    
+    if(endpoint == null){
+       console.log('No receiver-endpoint, skipping')
+       return
+    }
 
     //See https://octokit.github.io/rest.js/
     const client = new github.GitHub(repoToken)
@@ -68,7 +73,6 @@ export async function run() {
         console.error("Download for: " + file.filename + " failed : " + res.status)
       }
 
-      if(endpoint != null){
       await axios({
         method: 'post',
         url: endpoint,
@@ -120,18 +124,15 @@ export async function run() {
         })
         .finally(function () {
           // always executed
-        client.issues.createComment({
+        });
+    });
+
+    client.issues.createComment({
       owner: issue.owner,
       repo: issue.repo,
       issue_number: issue.number,
       body: "Analzyed " + files.data.length + " files 🙌🏻 on event: " + github.context.eventName
     })
-        });
-    });
-    } 
-    
-
-    
 
 
   } catch (error) {
